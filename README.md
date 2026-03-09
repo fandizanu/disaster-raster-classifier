@@ -6,7 +6,7 @@ Plugin QGIS untuk **klasifikasi raster bencana** menggunakan model Machine Learn
 
 | ID | Kelas         | Warna       |
 |----|---------------|-------------|
-| 0  | Rendah   | Hijau M |
+| 0  | Rendah   | Hijau |
 | 1  | Sedang       | Kuning       |
 | 2  | Tinggi| Merah    |
 
