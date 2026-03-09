@@ -6,10 +6,10 @@ Plugin QGIS untuk **klasifikasi raster bencana** menggunakan model Machine Learn
 
 | ID | Kelas         | Warna       |
 |----|---------------|-------------|
-| 0  | Non-Bencana   | Hijau Muda  |
-| 1  | Banjir        | Biru        |
-| 2  | Banjir Bandang| Biru Tua    |
-| 3  | Longsor       | Coklat      |
+| 0  | Rendah   | Hijau M |
+| 1  | Sedang       | Kuning       |
+| 2  | Tinggi| Merah    |
+
 
 ---
 
