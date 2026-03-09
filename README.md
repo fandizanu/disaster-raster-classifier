@@ -53,9 +53,10 @@ python generate_icon.py
 1. **Buka plugin**: Menu **Raster → Disaster Classifier → Disaster Raster Classifier**
    (atau klik icon di toolbar)
 
-2. **Pilih Layer Raster Input**: Pilih raster yang sudah dimuat di QGIS
+2. **Pilih Layer Raster Input**: Pilih raster yang sudah dimuat di QGIS. Pastikan raster tiap input variabel memiliki resolusi dan Coordinate Reference System (CRS) yang sama. 
 
 3. **Load Model**: Klik "Pilih Model" → pilih file `.pkl` atau `.joblib`
+   - Plugin memiliki model built-in yang dapat didownload dari awal 
    - Plugin akan otomatis mendeteksi jumlah band dari raster
    - Pastikan jumlah band raster = jumlah fitur saat training model
 
@@ -122,4 +123,4 @@ disaster_classifier/
 ---
 
 ## 📝 Lisensi
-GNU General Public License v2 atau lebih baru.
+Proyek ini menggunakan MIT License.
