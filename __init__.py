@@ -4,6 +4,9 @@ Disaster Raster Classifier - QGIS Plugin
 Klasifikasi bencana: Banjir, Banjir Bandang, Longsor
 """
 
+
+
+
 def classFactory(iface):
     """
     Entry point plugin QGIS.

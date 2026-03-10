@@ -6,7 +6,7 @@ qgisMaximumVersion=3.99
 
 description=Disaster risk classification (Flood, Flash Flood, Landslide) using Weighted Ensemble ML
 
-version=1.0.0
+version=1.0.2
 
 author=Zanu Alfandi Kamil
 
@@ -29,4 +29,4 @@ experimental=False
 deprecated=False
 hasProcessingProvider=no
 
-changelog=Version 1.0.0 (2026-03-09): Initial release. Weighted Ensemble (RF + LightGBM + XGBoost) classification with F1-Score based weighted voting. 9 raster variable inputs. Auto-fill from folder. Automatic risk class styling. Built-in model support.
+changelog=Version 1.0.2 (2026-03-09): Initial release. Weighted Ensemble (RF + LightGBM + XGBoost) classification with F1-Score based weighted voting. 9 raster variable inputs. Auto-fill from folder. Automatic risk class styling. Built-in model support.

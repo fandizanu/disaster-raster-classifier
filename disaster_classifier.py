@@ -8,6 +8,8 @@ from qgis.PyQt.QtWidgets import QAction
 from qgis.PyQt.QtGui import QIcon
 
 
+
+
 class DisasterClassifierPlugin:
     """Plugin QGIS untuk klasifikasi raster bencana."""
 

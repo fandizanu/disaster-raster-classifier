@@ -7,7 +7,6 @@ Output : 1 risk classification raster (1=Low, 2=Medium, 3=High)
 """
 
 import os
-import pickle
 
 from qgis.PyQt.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
@@ -46,6 +45,8 @@ VARIABLES = [
     ("contour_density",  "Contour Density"),
     ("contour_spacing",  "Contour Spacing"),
 ]
+
+
 
 
 class DisasterClassifierDialog(QDialog):
@@ -286,12 +287,8 @@ class DisasterClassifierDialog(QDialog):
             return
         try:
             self._log("🔄 Loading model...")
-            try:
-                import joblib
-                self.model = joblib.load(path)
-            except Exception:
-                with open(path, 'rb') as f:
-                    self.model = pickle.load(f)
+            import joblib
+            self.model = joblib.load(path)
 
             self.txtModelPath.setText(path)
 
@@ -314,8 +311,71 @@ class DisasterClassifierDialog(QDialog):
     # SLOT — Load built-in model (embedded in plugin folder)
     # ────────────────────────────────────────────────────────────────────────
 
+    def _download_model(self, model_path):
+        """Download model dari GitHub Releases menggunakan urllib yang aman."""
+        import urllib.request
+        import urllib.parse
+
+        MODEL_URL = (
+            "https://github.com/fandizanu/disaster-raster-classifier"
+            "/releases/download/v1.0.0/disaster_model.pkl"
+        )
+
+        # Validasi URL hanya boleh https
+        parsed = urllib.parse.urlparse(MODEL_URL)
+        if parsed.scheme != "https":
+            self._log("❌ Download rejected: only HTTPS URLs are allowed.")
+            return False
+
+        model_dir = os.path.dirname(model_path)
+        os.makedirs(model_dir, exist_ok=True)
+
+        self._log("⬇️  Model not found. Downloading from GitHub...")
+        self._log(f"   URL: {MODEL_URL}")
+
+        try:
+            from qgis.PyQt.QtWidgets import QProgressDialog, QApplication
+            from qgis.PyQt.QtCore import Qt
+
+            progress = QProgressDialog(
+                "Downloading disaster_model.pkl from GitHub...",
+                "Cancel", 0, 0, self
+            )
+            progress.setWindowTitle("Downloading Model")
+            progress.setWindowModality(Qt.WindowModal)
+            progress.setMinimumDuration(0)
+            progress.setValue(0)
+            progress.show()
+            QApplication.processEvents()
+
+            # Download menggunakan https request yang sudah divalidasi
+            req = urllib.request.Request(MODEL_URL, method='GET')
+            with urllib.request.urlopen(req) as response:  # nosec B310
+                data = response.read()
+            with open(model_path, 'wb') as out_file:
+                out_file.write(data)
+
+            progress.close()
+            self._log("✅ Model downloaded successfully!")
+            return True
+
+        except Exception as e:
+            self._log(f"❌ Failed to download model: {e}")
+            self._log("   Please download manually from GitHub Releases:")
+            self._log(f"   {MODEL_URL}")
+            self._log("   and place it in the 'model/' folder inside the plugin directory.")
+            from qgis.PyQt.QtWidgets import QMessageBox
+            msg = (
+                "Could not download the model automatically.\n\n"
+                "Please download it manually from:\n" + MODEL_URL + "\n\n"
+                "And place it in:\n" + model_dir
+            )
+            QMessageBox.warning(self, "Model Download Failed", msg)
+            return False
+
     def _load_builtin_model(self):
-        """Auto-load .pkl model embedded in the plugin model/ folder."""
+        """Auto-load .pkl model embedded in the plugin model/ folder.
+        Jika tidak ada, otomatis download dari GitHub Releases."""
         import sys
         import importlib.util
 
@@ -323,8 +383,11 @@ class DisasterClassifierDialog(QDialog):
         model_path = os.path.join(plugin_dir, 'model', 'disaster_model.pkl')
 
         if not os.path.exists(model_path):
-            self._log("ℹ️  No built-in model found. Please load a model via '📂 Browse Model'.")
-            return
+            self._log("ℹ️  No built-in model found. Trying to download from GitHub...")
+            success = self._download_model(model_path)
+            if not success:
+                self._log("ℹ️  Please load a model manually via '📂 Browse Model'.")
+                return
 
         try:
             # Register ensemble_model into sys.modules so joblib can resolve the class
