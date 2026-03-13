@@ -29,7 +29,7 @@ from .classification_worker import ClassificationWorker
 # ── Output class configuration ──────────────────────────────────────────────
 CLASS_CONFIG = {
     1: {"label": "Low Risk",    "color": QColor(0, 200, 100)},   # Green
-    2: {"label": "Medium Risk", "color": QColor(255, 180, 0)},   # Yellow
+    2: {"label": "Medium Risk", "color": QColor(244, 249, 41)},  # Yellow-Green
     3: {"label": "High Risk",   "color": QColor(220, 30,  30)},  # Red
 }
 
