@@ -6,13 +6,15 @@ qgisMaximumVersion=3.99
 
 description=Disaster risk classification (Flood, Flash Flood, Landslide) using Weighted Ensemble ML
 
-version=1.0.2
+version=1.0.3
 
 author=Zanu Alfandi Kamil
 
 email=zanukamil@gmail.com
 
-about=Plugin QGIS untuk klasifikasi risiko bencana berbasis raster menggunakan model Ensemble Learning (Random Forest, LightGBM, XGBoost) dengan metode Weighted Voting berdasarkan F1-Score. Dikembangkan sebagai bagian dari skripsi Program Studi Magister Teknologi Informasi, Jurusan Teknik, Universitas Gadjah Mada, Tahun Akademik 2023 Genap. Input: 9 variabel raster (Slope, Elevasi, Land Use, NDVI, Curah Hujan, Jarak ke Pantai, Buffer Sungai, Kerapatan Kontur, Jarak Antar Kontur). Output: Peta risiko 3 kelas (Low / Medium / High Risk). Studi kasus: Yogyakarta. --- A QGIS plugin for raster-based disaster risk classification using Weighted Ensemble Learning (Random Forest + LightGBM + XGBoost) with Weighted Voting based on F1-Score. Developed as part of a thesis in the Master of Information Technology Program, Department of Engineering, Universitas Gadjah Mada, Academic Year 2023 Even Semester. Inputs: 9 raster variables (Slope, Elevation, Land Use, NDVI, Rainfall, Distance to Coast, River Buffer, Contour Density, Contour Spacing). Output: 3-class disaster risk map (Low / Medium / High Risk). Study area: Yogyakarta, Indonesia.
+about=Plugin QGIS untuk klasifikasi risiko bencana berbasis raster menggunakan model Ensemble Learning (Random Forest, LightGBM, XGBoost) dengan metode Weighted Voting berdasarkan F1-Score. Dikembangkan sebagai bagian dari skripsi Program Studi Magister Teknologi Informasi, Jurusan Teknik, Universitas Gadjah Mada, Tahun Akademik 2023 Genap. Input: 9 variabel raster (Slope, Elevasi, Land Use, NDVI, Curah Hujan, Jarak ke Pantai, Buffer Sungai, Kerapatan Kontur, Jarak Antar Kontur). Output: Peta risiko 3 kelas (Low / Medium / High Risk). Studi kasus: Yogyakarta. 
+--- 
+A QGIS plugin for raster-based disaster risk classification using Weighted Ensemble Learning (Random Forest + LightGBM + XGBoost) with Weighted Voting based on F1-Score. Developed as part of a thesis in the Master of Information Technology Program, Department of Engineering, Universitas Gadjah Mada, Academic Year 2023 Even Semester. Inputs: 9 raster variables (Slope, Elevation, Land Use, NDVI, Rainfall, Distance to Coast, River Buffer, Contour Density, Contour Spacing). Output: 3-class disaster risk map (Low / Medium / High Risk). Study area: Yogyakarta, Indonesia.
 
 repository=https://github.com/fandizanu/disaster-raster-classifier
 
@@ -29,4 +31,5 @@ experimental=False
 deprecated=False
 hasProcessingProvider=no
 
-changelog=Version 1.0.2 (2026-03-09): Initial release. Weighted Ensemble (RF + LightGBM + XGBoost) classification with F1-Score based weighted voting. 9 raster variable inputs. Auto-fill from folder. Automatic risk class styling. Built-in model support.
+changelog=Version 1.0.3 (2026-03-13): Fix Medium Risk color palette to QColor(244, 249, 41).
+Version 1.0.2 (2026-03-09): Initial release. Weighted Ensemble (RF + LightGBM + XGBoost) classification with F1-Score based weighted voting. 9 raster variable inputs. Auto-fill from folder. Automatic risk class styling. Built-in model support.
